@@ -169,6 +169,7 @@ session_start();
 				</div>
 				<br>
 				<section>
+					<form class="" action="tienda_index.php?$Mostrar['nombre'];" method="get">
 
 					<?php
 					$_GET['Buscador']= null;
@@ -185,14 +186,13 @@ session_start();
 							?>
 							<form class="" action="index.html" method="post">
 
-						<div class="tarjeta" >
+						<div class="tarjeta"  onclick="EnviarDatosTienda(<?php echo $Mostrar['id']; ?>)">
 							<div class="tarjetaContenido">
-								<a href="vistas/tienda_index.php">
 									<h4 id="tienda_nombre"><?php echo $Mostrar['nombre'];  ?></h4>
-								</a>
 								<div class="dropdown-divider"></div>
 								<p id="tienda_descripcion">
 									<?php
+										$Producto = $Mostrar['producto'];
 										echo $Mostrar['producto'];
 										echo $Mostrar['foto'];
 									 ?>
@@ -213,7 +213,7 @@ session_start();
 						while ($Mostrar = mysqli_fetch_array($Resul)) {
 						?>
 
-					<div class="tarjeta">
+					<div class="tarjeta" onclick="EnviarDatosTienda(<?php echo $Mostrar['id']; ?>)">
 						<div class="tarjetaContenido">
 							<h4 id="tienda_nombre"><?php echo $Mostrar['nombre'];  ?></h4>
 							<div class="dropdown-divider"></div>
@@ -233,6 +233,7 @@ session_start();
 					}
 					}
 					?>
+					</form>
 				</section>
 			</div>
 		</main>
@@ -241,5 +242,14 @@ session_start();
 		</footer>
 	</div>
 </body>
-
 </html>
+
+<script type="text/javascript">
+function EnviarDatosTienda(id)
+{
+	alert(id);
+	window.location.replace("http://localhost/CUTMarket.V2/vistas/tienda_index.php");
+
+}
+
+</script>
