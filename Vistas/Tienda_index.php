@@ -220,7 +220,7 @@ $ID = $_GET['id'];
 									<?php
 										}
 										//$Cuenta = $_SESSION['User'];
-										$Sql = "SELECT * FROM producto WHERE id_tienda = 1;";
+										$Sql = "SELECT * FROM producto WHERE id_tienda = '$ID';";
 										$Resul = mysqli_query($conn,$Sql);
 
 										while ($Mostrar = mysqli_fetch_array($Resul)) {
@@ -238,7 +238,13 @@ $ID = $_GET['id'];
 									<?php } ?>
 								</div>
 							</div>
-							<?php if($Mostrar['Status'] == 1){ ?>
+							<?php
+							$Sql1 = "SELECT estado FROM tienda WHERE id_tienda = '$ID' ;";
+							$Resul = mysqli_query($conn,$Sql1);
+
+							while ($Mostrar = mysqli_fetch_array($Resul)) {
+
+								if($Mostrar['estado'] == 1){ ?>
 							<div class="card-footer text-muted">
 								<i class="fas fa-circle" style="color: green;"></i> Estoy disponible
 							</div>
@@ -246,7 +252,7 @@ $ID = $_GET['id'];
 							<div class="card-footer text-muted" >
 								<i class="fas fa-circle" style="color: gray;"></i> No estoy disponible
 							</div>
-						<?php } ?>
+						<?php } }?>
 						</div>
 					</div>
 
