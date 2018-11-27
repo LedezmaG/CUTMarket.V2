@@ -2,17 +2,17 @@
 
   include("Conexion.php");
 
-  $User = $_POST['User'];
+  $Codigo = $_POST['Codigo'];
   $Pass = $_POST['Pass'];
 
-  $Query = $conn -> query("SELECT * FROM usuario WHERE Username = '$User' and Password = '$Pass';");
+  $Query = $conn -> query("SELECT * FROM usuario WHERE codigo_udg = '$Codigo' and Password = '$Pass';");
   if ($Resultado = mysqli_fetch_array($Query))
   {
     //if (password_verify($Pass,  $Resultado[0]));
     //{
         session_start();
-        $_SESSION['tipo'] = $Resultado['Tipo'];
-        $_SESSION['User'] = $User;
+        $_SESSION['tipo'] = $Resultado['tipo_usuario'];
+        $_SESSION['User'] = $Resultado['User'];
         $_SESSION['Pass'] = $Pass;
         $_SESSION['Loggeado'] = true;
         //echo "<script language='javascript'> alert('¡Bienvenido!')</script>";

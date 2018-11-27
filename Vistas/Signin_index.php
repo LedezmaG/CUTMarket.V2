@@ -193,6 +193,12 @@
         <input type="text" name="Codigo" id="inputCodigo" class="form-control" placeholder="Codigo Estudiante o Maestro" autocomplete="off" required autofocus>
         <label for="inputNombre" class="sr-only">Nombre</label>
         <input type="text" name="Nombre" id="inputNombre" class="form-control" placeholder="Nombre" autocomplete="off" required autofocus>
+        <label for="inputTelefono" class="sr-only">Telefono</label>
+        <input type="text" name="Telefono" id="inputTelefono" class="form-control" placeholder="Telefono" autocomplete="off" required autofocus>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="text" name="Email" id="inputEmail" class="form-control" placeholder="Email" autocomplete="off" required autofocus>
+        <label for="inputFecha" class="sr-only">Fecha de nacimiento</label>
+        <input type="date" name="Fecha" id="inputFecha" class="form-control" placeholder="Fecha de nacimiento" autocomplete="off" required autofocus>
         <label for="inputUsername" class="sr-only">User</label>
         <input type="text" name="Username" id="inputUsername" class="form-control" placeholder="Username" autocomplete="off" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>

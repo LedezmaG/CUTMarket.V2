@@ -1,4 +1,7 @@
-<?php include('../Logica/Conexion.php'); ?>
+<?php
+include('../Logica/Conexion.php');
+$ID = $_GET['id'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -125,7 +128,7 @@
 			<!--BARRA DE NAVEGACION-->
 			<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #212529;">
 				<!--LOGO-->
-			<a class="navbar-brand" href="../index.php"><img src="../img/Cut_Market.png" width="100" height="52"></a>
+			<a class="navbar-brand" href="../index.php"><img src="../mg/Cut_Market.png" width="100" height="52"></a>
 				<!--TOGGLER-->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -184,14 +187,12 @@
 		<main>
 			<div class="contenedor-inicio">
 				<section >
-
 					<?php
-						//$Cuenta = $_SESSION['User'];
-						$Sql = "SELECT * FROM producto ;";
-						$Resul = mysqli_query($conn,$Sql);
+					$Sql = "SELECT * FROM tienda WHERE id_tienda = $ID;";
+					$Resul = mysqli_query($conn,$Sql);
 
-						while ($Mostrar = mysqli_fetch_array($Resul)) {
-						?>
+					while ($Mostrar = mysqli_fetch_array($Resul)) {
+					 ?>
 
 					<div class=contenedor-tienda>
 						<div class="card text-center">
@@ -201,10 +202,10 @@
 							<div class="card-body">
 								<img class="card-img-top" src="../img/donas.jpg" alt="Card image cap">
 								<br>
-								<h5 class="card-title"><?php echo $Mostrar['Titulo'];  ?></h5>
+								<h5 class="card-title"><?php echo $Mostrar['nombre'];  ?></h5>
 								<div class="jumbotron">
 									<p>Ubicacion: <?php echo $Mostrar['ubicacion']; ?> </p>
-									<p>Telefono: <?php echo $Mostrar['telefono']; ?></p>
+									<p>Telefono: </p>
 									<p></p>
 								</div>
 								<div class="productos-tienda" >
@@ -216,16 +217,25 @@
 											<h3>Precio: </h3>
 										</div>
 									</div>
+									<?php
+										}
+										//$Cuenta = $_SESSION['User'];
+										$Sql = "SELECT * FROM producto WHERE id_tienda = 1;";
+										$Resul = mysqli_query($conn,$Sql);
+
+										while ($Mostrar = mysqli_fetch_array($Resul)) {
+										?>
 									<div class="productos">
 										<a href="#">
 											<div class="productos-nombre" style="font-size: 17px;">
-												<p></p>
+												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['nombre']; ?></span></p>
 											</div>
 											<div class="productos-precio">
-												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['Precio']; ?></span></p>
+												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?></span></p>
 											</div>
 										</a>
 									</div>
+									<?php } ?>
 								</div>
 							</div>
 							<?php if($Mostrar['Status'] == 1){ ?>
@@ -239,7 +249,7 @@
 						<?php } ?>
 						</div>
 					</div>
-						<?php } ?>
+
 				</section>
 			</div>
 		</main>

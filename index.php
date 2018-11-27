@@ -179,21 +179,21 @@ session_start();
 						echo "Buscador";
 						if (empty($Buscar)) {
 							//$Cuenta = $_SESSION['User'];
-							$Sql = "SELECT * FROM inicio;";
+							$Sql = "SELECT * FROM tienda;";
 							$Resul = mysqli_query($conn,$Sql);
 
 							while ($Mostrar = mysqli_fetch_array($Resul)) {
 							?>
 							<form class="" action="index.html" method="post">
 
-						<div class="tarjeta"  onclick="EnviarDatosTienda(<?php echo $Mostrar['id']; ?>)">
+						<div class="tarjeta"  onclick="EnviarDatosTienda(<?php echo $Mostrar['id_tienda']; ?>)">
 							<div class="tarjetaContenido">
 									<h4 id="tienda_nombre"><?php echo $Mostrar['nombre'];  ?></h4>
 								<div class="dropdown-divider"></div>
 								<p id="tienda_descripcion">
 									<?php
-										$Producto = $Mostrar['producto'];
-										echo $Mostrar['producto'];
+										$Producto = $Mostrar['ubicacion'];
+										echo $Mostrar['descripcion'];
 										echo $Mostrar['foto'];
 									 ?>
 								</p>
@@ -207,20 +207,21 @@ session_start();
 						}
 					}
 					else {
-						$Sql = "SELECT * FROM inicio WHERE Nombre LIKE '%$Buscar%';";
+						$Sql = "SELECT * FROM tienda WHERE nombre LIKE '%$Buscar%';";
 						$Resul = mysqli_query($conn,$Sql);
 
 						while ($Mostrar = mysqli_fetch_array($Resul)) {
 						?>
 
-					<div class="tarjeta" onclick="EnviarDatosTienda(<?php echo $Mostrar['id']; ?>)">
+					<div class="tarjeta" onclick="EnviarDatosTienda(<?php echo $Mostrar['id_tienda']; ?>)">
 						<div class="tarjetaContenido">
 							<h4 id="tienda_nombre"><?php echo $Mostrar['nombre'];  ?></h4>
 							<div class="dropdown-divider"></div>
 							<p id="tienda_descripcion">
 								<?php
-									echo $Mostrar['producto'];
-									echo $Mostrar['foto'];
+								$Producto = $Mostrar['ubicacion'];
+								echo $Mostrar['descripcion'];
+								echo $Mostrar['foto'];
 								 ?>
 							</p>
 						</div>
@@ -248,7 +249,8 @@ session_start();
 function EnviarDatosTienda(id)
 {
 	alert(id);
-	window.location.replace("http://localhost/CUTMarket.V2/vistas/tienda_index.php");
+	location.href="/CUTMarket.V2/vistas/tienda_index.php?id="+ id ;
+	//window.location.replace("http://localhost/CUTMarket.V2/vistas/tienda_index.php");
 
 }
 

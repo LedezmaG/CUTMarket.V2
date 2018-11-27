@@ -176,8 +176,8 @@
       <form class="form-signin" action="../Logica/Login_logica.php" method="post">
         <img class="mb-4" src="../img/Access-Control-Lock.png" width="100" height="100">
         <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
-        <label for="inputUser" class="sr-only">User</label>
-        <input type="text" id="inputUser" name="User" class="form-control" placeholder="User" autocomplete="off" required autofocus>
+        <label for="inputCodigo" class="sr-only">Codigo</label>
+        <input type="text" id="inputCodigo" name="Codigo" class="form-control" placeholder="Codigo" autocomplete="off" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="Pass" class="form-control" placeholder="Password" autocomplete="off" required>
         <br>
