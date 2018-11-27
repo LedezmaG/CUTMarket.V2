@@ -1,0 +1,45 @@
+/***RESET***/
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  display: -ms-flexbox;
+ 	display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 85px;
+}
+
+/***CONTENEDOR GENERAL***/
+.contenedor-general {
+	width: 100%;
+	height: auto;
+	padding: 15px;
+}
+
+/***NAVBAR***/
+.dropdown-item:focus {
+	background: #D8D8D8 !important;
+	color: black;
+}
+
+.navbar-collapse a:hover {
+	color: #03648f !important;
+}
+
+.active {
+	color: #FFF;
+}
+
+/***CONTENIDO***/
+.contenido-principal {
+	width: 100%;
+	height: auto;
+	margin: auto;
+}
