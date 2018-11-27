@@ -123,10 +123,10 @@ session_start();
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Mi Tienda</a>
 								<div class="dropdown-divider"></div>
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Another action</a>
+								<a class="dropdown-item" href="#">Pedidos a mi tienda</a>
 								<div class="dropdown-divider"></div>
 								<!--BOTON PEDIDOS-->
 								<a id="btnPedidos" class="dropdown-item" href="#">Pedidos</a>
