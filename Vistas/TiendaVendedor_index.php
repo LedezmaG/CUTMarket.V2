@@ -1,6 +1,7 @@
 <?php
 include('../Logica/Conexion.php');
-$ID = $_GET['id'];
+session_start();
+$codigo = $_SESSION['Codigo'];
 ?>
 
 <!DOCTYPE html>
@@ -186,12 +187,14 @@ $ID = $_GET['id'];
 		<!--CONTENIDO-->
 		<main>
 			<div class="contenedor-inicio">
+
 				<section >
 					<?php
-					$Sql = "SELECT * FROM tienda WHERE id_tienda = $ID;";
+					$Sql = "SELECT * FROM tienda WHERE codigo_udg = '$codigo';";
 					$Resul = mysqli_query($conn,$Sql);
 
 					while ($Mostrar = mysqli_fetch_array($Resul)) {
+          $IdTienda = $Mostrar['id_tienda'];
 					 ?>
 
 					<div class=contenedor-tienda>
@@ -205,55 +208,22 @@ $ID = $_GET['id'];
 								<h5 class="card-title"><?php echo $Mostrar['nombre'];  ?></h5>
 								<div class="jumbotron">
 									<p>Ubicacion: <?php echo $Mostrar['ubicacion']; ?> </p>
-									<p>Telefono: </p>
 									<p></p>
 								</div>
+              <?php } ?>
 								<div class="productos-tienda" >
-									<div class="productos-header">
-										<div id="titulo" class="productos-nombre-header">
+									<div class="productos-header" >
+										<div id="titulo" class="productos-nombre-header" >
 											<h3>Productos</h3>
 										</div>
-										<div id="titulo" class="productos-precio-header">
-											<h3>Precio: </h3>
-										</div>
-
 									</div>
-									<?php
-										}
-										//$Cuenta = $_SESSION['User'];
-										$Sql = "SELECT * FROM producto WHERE id_tienda = '$ID';";
-										$Resul = mysqli_query($conn,$Sql);
-
-										while ($Mostrar = mysqli_fetch_array($Resul)) {
-										?>
 									<div class="productos">
-										<a href="#">
-											<div class="productos-nombre" style="font-size: 17px;">
-												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['nombre']; ?></span></p>
+											<div class="productos-nombre" style="font-size: 17px;" onclick="EnviarProducto(<?php echo $IdTienda;?>)">
+												<p><span class="badge badge-secondary" style="font-size: 17px;">Agregar productos   <?php echo $IdTienda;?></span></p>
 											</div>
-											<div class="productos-precio">
-												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?></span></p>
-											</div>
-										</a>
 									</div>
-									<?php } ?>
 								</div>
 							</div>
-							<?php
-							$Sql1 = "SELECT estado FROM tienda WHERE id_tienda = '$ID' ;";
-							$Resul = mysqli_query($conn,$Sql1);
-
-							while ($Mostrar = mysqli_fetch_array($Resul)) {
-
-								if($Mostrar['estado'] == 1){ ?>
-							<div class="card-footer text-muted">
-								<i class="fas fa-circle" style="color: green;"></i> Estoy disponible
-							</div>
-						<?php } else{?>
-							<div class="card-footer text-muted" >
-								<i class="fas fa-circle" style="color: gray;"></i> No estoy disponible
-							</div>
-						<?php } }?>
 						</div>
 					</div>
 
@@ -267,3 +237,13 @@ $ID = $_GET['id'];
 </body>
 
 </html>
+
+<script type="text/javascript">
+
+function EnviarProducto(id)
+{
+	location.href="/CUTMarket.V2/vistas/RegistroProducto_index.php?id="+ id ;
+	//window.location.replace("http://localhost/CUTMarket.V2/vistas/tienda_index.php");
+}
+
+</script>

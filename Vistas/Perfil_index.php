@@ -1,6 +1,7 @@
 <?php
 include("../Logica/Conexion.php");
 session_start();
+$codigo = $_SESSION['codigo'];
  ?>
 !DOCTYPE html>
 <html lang="en">
@@ -232,11 +233,13 @@ session_start();
         </nav>
       </header>
     <main>
+      <h1>hola</h1>
       <form class="form-registry" action="../logica/Signin_logica.php" method="post">
         <br><br><br>
         <?php
-        $Sql = "SELECT * FROM usuario WHERE Username = david and Password = admin;";
+        $Sql = "SELECT * FROM usuario WHERE codigo_udg = '$codigo';";
         $Resul = mysqli_query($conn,$Sql);
+
         while ($Mostrar = mysqli_fetch_array($Resul)) {
         ?>
         <br><br><br>
@@ -244,7 +247,7 @@ session_start();
         <br>
         Codigo
         <label for="inputCodigo" class="sr-only">Codigo</label>
-        <input type="text" name="Codigo" id="inputCodigo" class="form-control" placeholder="<?php echo $Mostrar['Codigo'];  ?>" autocomplete="off" required autofocus>
+        <input type="text" name="Codigo" id="inputCodigo" class="form-control" placeholder="<?php echo $Mostrar['codigo_udg'];  ?>" autocomplete="off" required autofocus>
         Nombre
         <label for="inputNombre" class="sr-only">Nombre</label>
         <input type="text" name="Nombre" id="inputNombre" class="form-control" placeholder="<?php echo $Mostrar['Nombre'];  ?>" autocomplete="off" required autofocus>

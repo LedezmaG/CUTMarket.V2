@@ -13,6 +13,7 @@
         session_start();
         $_SESSION['tipo'] = $Resultado['tipo_usuario'];
         $_SESSION['User'] = $Resultado['User'];
+        $_SESSION['Codigo'] = $Codigo;
         $_SESSION['Pass'] = $Pass;
         $_SESSION['Loggeado'] = true;
         //echo "<script language='javascript'> alert('¡Bienvenido!')</script>";

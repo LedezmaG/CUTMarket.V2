@@ -1,3 +1,12 @@
+<?php
+
+include('../Logica/Conexion.php');
+session_start();
+$ID = $_GET['id'];
+$_SESSION['idTienda'] = $ID;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -186,41 +195,25 @@
         </nav>
     </header>
     <main>
-      <form class="form-registry" action="../logica/Signin_logica.php" method="POST" enctype="multipart/form-data">
+      <form class="form-registry" action="../logica/RegistrarProducto_logica.php" method="POST">
         <br><br><br>
-        <h1 class="h3 mb-3 font-weight-normal">Registro</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Registro de producto</h1>
         <br>
-        <label for="inputCodigo" class="sr-only">Codigo</label>
-        <input type="text" name="txtCodigo" id="inputCodigo" class="form-control" placeholder="Codigo Estudiante o Maestro" autocomplete="off"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" maxlength=9 required autofocus>
         <label for="inputNombre" class="sr-only">Nombre</label>
-        <input type="text" name="txtNombre" id="inputNombre" class="form-control" placeholder="Nombre" autocomplete="off" onkeydown="return alphaOnly(event);" maxlength=30 required autofocus>
-        <label for="inputTelefono" class="sr-only">Telefono</label>
-        <input type="text" name="txtTelefono" id="inputTelefono" class="form-control" placeholder="Telefono" autocomplete="off"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" maxlength=10 required autofocus>
-        <label for="inputEmail" class="sr-only">Correo</label>
-        <input type="email" name="txtEmail" id="inputEmail" class="form-control" placeholder="Correo" autocomplete="off" required autofocus>
-        <label for="inputFecha" class="sr-only">Fecha de nacimiento</label>
-        <input type="date" name="inputFecha" id="inputFecha" class="form-control" placeholder="Fecha de nacimiento" autocomplete="off" required autofocus>
-        <label for="inputFecha" class="sr-only">Tipo de usuario</label>
-        <select class="form-control" placeholder="Tipo de usuario" autocomplete="off" required autofocus>
-        <option disabled selected value>Selecciona tipo de usuario</option>
-        <option value=1>Cliente</option>
-        <option value=2>Vendedor</option>
-        </select>
-        <label for="inputUsername" class="sr-only">Usuario</label>
-        <input type="text" name="txtUsuario" id="inputUsername" class="form-control" placeholder="Usuario" autocomplete="off" required autofocus>
-        <label for="inputPassword" class="sr-only">Contraseña</label>
-        <input type="password" name="txtPassword" id="inputPassword" class="form-control" placeholder="Contraseña" onkeyup='compararContrasena();' autocomplete="off" required>
-        <label for="inputConfirmar" class="sr-only">Confirmar Contraseña</label>
-        <input type="password" name="txtConfirmar" id="inputConfirmar" class="form-control" placeholder="Confirmar contraseña" onkeyup='compararContrasena();' autocomplete="off" required>
+        <input type="text" name="txtNombre" id="inputNombre" class="form-control" placeholder="Nombre de producto" autocomplete="off"   maxlength=20 required autofocus>
+
+        <label for="inputDescripcion" class="sr-only">Descripcion</label>
+        <textarea name="txtDescripcion" id="inputDescripcion" class="form-control" placeholder="Descripcion" autocomplete="off"  maxlength=30 rows=2 required autofocus></textarea>
+
+        <label for="inputPrecio" class="sr-only">Precio</label>
+        <input type="text" name="txtPrecio" id="inputPrecio" class="form-control" placeholder="Precio" autocomplete="off" required autofocus>
+
+
+
         <h3 id="lblEstado"></h3>
-        <br>
-        <div class="dropdown-divider"></div>
-        <label for="inputPhoto">Credencial de Estudiante o Maestro</label>
-        <input type="file" name="inputFoto" id="inputFoto" class="file-upload-btn" placeholder="Photo" autocomplete="off" required>
-        <img id="img" src=''>
 
         <br><br>
-        <button class="btn btn-lg btn-dark btn-block" type="submit" id="btnSubmit" name="btnSubmit">Registrarse</button>
+        <button class="btn btn-lg btn-dark btn-block" type="submit" id="btnSubmit" name="btnSubmit">Registrar producto</button>
       </form>
     </main>
     <footer>
@@ -229,47 +222,11 @@
     </div>
     <script>
 
-    /* $('#inputFoto').change( function(event) {
-    var tmppath = URL.createObjectURL(event.target.files[0]);
-    document.write(tmppath);
+  $("input[name=txtPrecio]").on('input', function() {
+  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+});
 
-      document.getElementById('img').src = "";
 
-});*/
-        function alphaOnly(event) {
-      var key = event.keyCode;
-      return ((key >= 65 && key <= 90) || key == 8 || key == 32 || key == 9);
-    };
-
-    function numberOnly(event) {
-      var key = event.keyCode;
-      return ((key >= 48 && key <= 57) || key == 8 || key == 32 ||  key == 9);
-    };
-
-    var compararContrasena = function()
-    {
-      if(document.getElementById('inputPassword').value != document.getElementById('inputConfirmar').value)
-      {
-        document.getElementById('lblEstado').style.color = 'red';
-        //document.getElementById('lblEstado').style.backgroundColor = 'red';
-        document.getElementById('lblEstado').innerHTML = "Contraseñas no coinciden";
-        document.getElementById('btnSubmit').disabled = true;
-      }
-      else if(document.getElementById('inputPassword').value == "" && document.getElementById('inputConfirmar').value == "")
-      {
-        document.getElementById('lblEstado').style.color = 'yellow';
-        document.getElementById('lblEstado').innerHTML = "Contraseñas vacias";
-        document.getElementById('btnSubmit').disabled = true;
-      }
-
-      else
-      {
-          document.getElementById('lblEstado').style.color = 'green';
-          document.getElementById('lblEstado').innerHTML = "Contraseñas coinciden";
-          document.getElementById('btnSubmit').disabled = false;
-      }
-
-    }
     </script>
   </body>
 </html>

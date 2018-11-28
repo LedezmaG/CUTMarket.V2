@@ -109,8 +109,6 @@ session_start();
 								<!--BOTON ***-->
 								<a class="dropdown-item" <?php if($_SESSION['Loggeado']== true){ ?> href="vistas/Pedidos_index.php" <?php }else{ ?> href="vistas/Login_index.php" <?php } ?>>Pedidos</a>
 								<div class="dropdown-divider"></div>
-								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Something else here</a>
 							</div>
 						</li>
 						<!--BOTON TIENDA-->
@@ -123,13 +121,13 @@ session_start();
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Mi Tienda</a>
-								<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="Vistas/TiendaVendedor_index.php" >Mi Tienda</a>
+									<div class="dropdown-divider"></div>
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Pedidos a mi tienda</a>
+								<a class="dropdown-item" href="Vistas/Pedidos_index.php">Pedidos</a>
 								<div class="dropdown-divider"></div>
 								<!--BOTON PEDIDOS-->
-								<a id="btnPedidos" class="dropdown-item" href="#">Pedidos</a>
+								<a id="btnPedidos" class="dropdown-item" href="#"></a>
 							</div>
 						</li>
 					<?php } ?>
@@ -194,12 +192,11 @@ session_start();
 									<?php
 										$Producto = $Mostrar['ubicacion'];
 										echo $Mostrar['descripcion'];
-										echo $Mostrar['foto'];
 									 ?>
 								</p>
 							</div>
 							<div class="tarjetaImagen">
-								<img src="img/papas-naturales.png">
+								<img src="imgUsuarios/<?php echo $Mostrar['foto']; ?>">
 							</div>
 						</div>
 					</form>
@@ -221,12 +218,12 @@ session_start();
 								<?php
 								$Producto = $Mostrar['ubicacion'];
 								echo $Mostrar['descripcion'];
-								echo $Mostrar['foto'];
+
 								 ?>
 							</p>
 						</div>
 						<div class="tarjetaImagen">
-							<img src="img/papas-naturales.png">
+							<img src="imgUsuarios/<?php echo $Mostrar['foto']; ?>">
 						</div>
 					</div>
 				<?php
@@ -246,12 +243,15 @@ session_start();
 </html>
 
 <script type="text/javascript">
+function GetId(codigo)
+{
+	location.href="/CUTMarket.V2/vistas/TiendaVendedor_index.php?id="+ codigo ;
+}
+
 function EnviarDatosTienda(id)
 {
-	alert(id);
 	location.href="/CUTMarket.V2/vistas/tienda_index.php?id="+ id ;
 	//window.location.replace("http://localhost/CUTMarket.V2/vistas/tienda_index.php");
-
 }
 
 </script>

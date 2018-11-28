@@ -1,30 +1,61 @@
 <?php
   include('Conexion.php');
-  $Nombre = $_POST['Nombre'];
-  $Telefono = $_POST['Telefono'];
-  $Correo = $_POST['Email'];
-  $F_nacimiento = $_POST['Fecha'];
-  $Codigo = $_POST['Codigo'];
-  $User = $_POST['Username'];
-  $Pass = $_POST['Password'];
+
+  $codigo = $_POST['txtCodigo'];
+  $nombre = $_POST['txtNombre'];
+  $telefono = $_POST['txtTelefono'];
+  $correo = $_POST['txtEmail'];
+  $fecha = date('Y-m-d', strtotime($_POST['inputFecha']));
+  $usuario = $_POST['txtUsuario'];
+  $contra = $_POST['txtPassword'];
+
+
+  if(isset($_POST['btnSubmit']))
+  {
+    //obtiene el puro nombre de la imagen
+    $imagen = $_FILES['inputFoto']['name'];
+    $imagentmpnombre = $_FILES['inputFoto']['tmp_name'];
+    $carpeta = "../imgUsuarios/";
+
+    move_uploaded_file($imagentmpnombre, $carpeta.$imagen);
+  }
+
+ // echo "<div id='img_div'> ";
+  //echo "<img src='".$imagentmpnombre."'>";
+
 
   //$imagen = addslashes(file_get_contents($_FILES['inputPhoto']['tmp_name'])); // se toma la imajen para poder guarar en bd
 
-  $PassCryp = password_hash($Pass, PASSWORD_DEFAULT, array("cost" => 10));
+  $PassCryp = password_hash($contra, PASSWORD_DEFAULT, array("cost" => 10));
 
-  $Query = $conn -> query("SELECT (codigo_udg) FROM usuario WHERE codigo_udg = '$Codigo';");
-  if ($Resultado = mysqli_fetch_array($Query))
-  {
-    echo "NO";
-    //echo "<script language='javascript'> alert('Usuario Existente Porfavor elegir un usuario diferente')</script>";
-    //header("location: ../vistas/Signin_index.html");
-  }
+  $Query = "SELECT user FROM usuario WHERE user = '$usuario' ";
+  $queryCorreo = "SELECT correo FROM usuario WHERE correo = '$correo' ";
 
+  $result = $conn->query($Query);
+  $resultadoCorreo = $conn->query($queryCorreo);
+
+  if ($result->num_rows <= 0 && $resultadoCorreo->num_rows <=0) {
+
+    $Query_Registro = "INSERT INTO usuario VALUES ($codigo,'$nombre','$telefono','$correo','$usuario','$PassCryp','$fecha',1 ,1 , '$imagen');";
+    //$Resultado_ = $conn -> query($Query_Registro);
+    if ($conn->query($Query_Registro) === TRUE) {
+        ?>
+      <script>
+        alert("Usuario registrado con exito");
+        window.location.href = "../Vistas/Login_index.php";
+      </script>
+        <?php
+      }else {
+        echo "Error ";
+    }
+    }
   else {
-    $Query_Registro = "INSERT INTO usuario (codigo_udg, nombre, telefono, correo, user, password, fecha_nacimiento) VALUES ($Codigo, $Nombre, $Telefono, $Correo, $User, $Pass, $F_nacimiento);";
-    $Resultado_ = $conn -> query($Query_Registro);
-    echo "Registrado";
-    //header("location: ../vistas/Login_index.php");
+      ?>
+      <script>
+        alert("Usuario o correo ya existente");
+        window.location.href = "../Vistas/Signin_index.php"
+      </script>
+      <?php
 
   }
 
