@@ -3,7 +3,11 @@
 include('../Logica/Conexion.php');
 session_start();
 $ID = $_GET['id'];
-$_SESSION['idTienda'] = $ID;
+$_SESSION['idTienda'] = $ID;<?php
+if ($_SESSION['Loggeado'] != true) {
+	header("location: ../index.php");
+}
+
 ?>
 
 

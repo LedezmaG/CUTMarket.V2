@@ -1,6 +1,12 @@
 <?php
 include('../Logica/Conexion.php');
 $ID = $_GET['id'];
+$_SESSION['id_Tienda'] = $ID;
+
+if ($_SESSION['Loggeado'] != true) {
+	header("location: ../index.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -119,6 +125,10 @@ $ID = $_GET['id'];
 	    	text-decoration: none;
 	    	color: black;
 		}
+
+		.cantidad{
+			width: 40px;
+		}
 	</style>
 </head>
 
@@ -200,8 +210,18 @@ $ID = $_GET['id'];
 								<h1><?php echo $Mostrar['nombre'];?></h1>
 							</div>
 							<div class="card-body">
-								<img class="card-img-top" src="../img/donas.jpg" alt="Card image cap">
+								<div class="" onclick="cambiarimg()">
+									<img class="card-img-top" src="../img/donas.jpg" alt="Card image cap" >
+									<br>
+								</div>
 								<br>
+								<form class="" action="../Logica/Tienda-foto_Logica.php" method="post">
+
+									<label for="inputPhoto">Foto de tienda</label>
+					        <input type="file" name="inputFoto" id="inputFoto" class="file-upload-btn" placeholder="Photo" autocomplete="off">
+								 	<br><input type="submit" id="sutmitFOTO" name="" value="Subir Foto">
+
+								</form>
 								<h5 class="card-title"></h5>
 								<div class="jumbotron">
 									<p>Ubicacion: <?php echo $Mostrar['ubicacion']; ?> </p>
@@ -226,22 +246,25 @@ $ID = $_GET['id'];
 
 										while ($Mostrar = mysqli_fetch_array($Resul)) {
 										?>
-									<div class="productos">
-										<a href="#">
-											<div class="productos-nombre" style="font-size: 17px;">
-												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['nombre']; ?></span></p>
-											</div>
-
-											<div class="productos-precio">
-												<p>
-													<span style="font-size: 17px; color: rgb(122, 122, 122);"><i class="fas fa-plus-square"></i></span>
-													<span style="font-size: 17px; color: rgb(122, 122, 122);"><i class="fas fa-minus-square"></i></span>
-													<span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?> </span>
-												</p>
-											</div>
-										</a>
-									</div>
-									<?php } ?>
+										<form class="" action="Pededo-Nuevo_Logica.php" method="GET">
+											<div class="productos">
+													<div class="productos-nombre" style="font-size: 17px;">
+														<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['nombre']; ?></span></p>
+													</div>
+													<div class="productos-precio">
+														<p>
+															<span style="font-size: 17px; color: rgb(122, 122, 122);" onclick="Mas( )"><i class="fas fa-plus-square"></i></span>
+															<span>
+																<input type="text" name="CantidadP" id="CantidadP" class="cantidad" placeholder="0" autocomplete="off"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" maxlength=9 autofocus>
+															</span>
+															<span style="font-size: 17px; color: rgb(122, 122, 122);" onclick="Menos()"><i class="fas fa-minus-square"></i></span>
+															<span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?> </span>
+														</p>
+													</div>
+										</div>
+										<?php } ?>
+										<input type="submit" name="Pededo" value="Realizar pedido">
+									</form>
 								</div>
 							</div>
 							<?php
@@ -270,5 +293,23 @@ $ID = $_GET['id'];
 		</footer>
 	</div>
 </body>
-
 </html>
+
+<script type="text/javascript">
+	var num = 0;
+function Mas(){
+	num++;
+	alert(num );
+}
+function Menos(){
+	if (num > 0) {
+		num--;
+		alert(num);
+	}
+}
+function cambiarimg()
+{
+	alert("hey");
+}
+
+</script>

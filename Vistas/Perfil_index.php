@@ -2,6 +2,10 @@
 include("../Logica/Conexion.php");
 session_start();
 $codigo = $_SESSION['codigo'];
+if ($_SESSION['Loggeado'] != true) {
+	header("location: ../index.php");
+}
+
  ?>
 !DOCTYPE html>
 <html lang="en">

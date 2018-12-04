@@ -97,6 +97,8 @@ session_start();
 							<a id="btnHome" class="nav-link" href="#"><i class="fas fa-home"></i> Inicio</a>
 						</li>
 						<!--BOTON OPCIONES-->
+						<?php
+							if ($_SESSION['Loggeado'] == true) {?>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-sliders-h"></i> Opciones
@@ -113,7 +115,7 @@ session_start();
 						</li>
 						<!--BOTON TIENDA-->
 						<?php
-							if ($_SESSION['tipo'] == 2) {
+					}if ($_SESSION['tipo'] != 2 && $_SESSION['Loggeado'] == true) {
 						 ?>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

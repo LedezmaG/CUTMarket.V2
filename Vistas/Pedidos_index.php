@@ -1,3 +1,11 @@
+<?php
+include("Logica/Conexion.php");
+session_start();
+if ($_SESSION['Loggeado'] != true) {
+	header("location: ../index.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
