@@ -197,12 +197,12 @@ $ID = $_GET['id'];
 					<div class=contenedor-tienda>
 						<div class="card text-center">
 							<div class="card-header">
-								<h1></h1>
+								<h1><?php echo $Mostrar['nombre'];?></h1>
 							</div>
 							<div class="card-body">
 								<img class="card-img-top" src="../img/donas.jpg" alt="Card image cap">
 								<br>
-								<h5 class="card-title"><?php echo $Mostrar['nombre'];  ?></h5>
+								<h5 class="card-title"></h5>
 								<div class="jumbotron">
 									<p>Ubicacion: <?php echo $Mostrar['ubicacion']; ?> </p>
 									<p>Telefono: </p>
@@ -231,8 +231,13 @@ $ID = $_GET['id'];
 											<div class="productos-nombre" style="font-size: 17px;">
 												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['nombre']; ?></span></p>
 											</div>
+
 											<div class="productos-precio">
-												<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?></span></p>
+												<p>
+													<span style="font-size: 17px; color: rgb(122, 122, 122);"><i class="fas fa-plus-square"></i></span>
+													<span style="font-size: 17px; color: rgb(122, 122, 122);"><i class="fas fa-minus-square"></i></span>
+													<span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?> </span>
+												</p>
 											</div>
 										</a>
 									</div>
