@@ -1,10 +1,12 @@
 <?php
 include("../Logica/Conexion.php");
 session_start();
-$codigo = $_SESSION['Codigo'];
+
 if ($_SESSION['Loggeado'] != true) {
 	header("location: ../index.php");
 }
+$codigo = $_SESSION['Codigo'];
+$idTienda =  $_SESSION['idTienda'];
 
  ?>
 <!DOCTYPE html>
@@ -231,19 +233,45 @@ if ($_SESSION['Loggeado'] != true) {
 			</header>
     <main>
 			<div class="form-registry">
-      <h1>Agregar Producto</h1>
-        <form class="" action="../Logica/RegistrarProducto_logica.php" method="post">
-          Nombre del producto
-          <label for="inputNombre" class="sr-only">Nombre</label>
-          <input type="text" name="Nombre" id="inputNombre" class="form-control" placeholder="" autocomplete="off" required autofocus>
-					Descripcion del producto
-          <label for="inputDescripcion" class="sr-only">Descripcion</label>
-          <input type="text" name="Descripcion" id="inputDescripcion" class="form-control" placeholder="" autocomplete="off" required autofocus>
-					Precio producto
-          <label for="inputPrecio" class="sr-only">Precio</label>
-          <input type="text" name="Precio" id="inputPrecio" class="form-control" placeholder="" autocomplete="off" required autofocus>
-					<input type="submit" class="btn btn-lg btn-dark btn-block" name="Enviar" value="Agregar Producto">
+
+      <h1>Editar Producto </h1>
+
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Identificador</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Foto</th>
+            </tr>
+          </thead>
+          <tbody >
+						<?php
+						$Sql = "SELECT * FROM producto WHERE id_tienda = '$idTienda';";
+						$Resul = mysqli_query($conn,$Sql);
+
+						while ($Mostrar = mysqli_fetch_array($Resul)) {
+						?>
+            <tr>
+              <th scope="row"><?php echo $Mostrar['id_producto']; ?></th>
+              <td><?php echo $Mostrar['nombre']; ?></td>
+              <td><?php echo $Mostrar['descripcion']; ?></td>
+              <td><?php echo $Mostrar['precio']; ?></td>
+              <td><?php echo $Mostrar['foto']; ?></td>
+            </tr>
+						      <?php } ?>
+          </tbody>
+        </table>
+
+        <form class="" action="EditProducto2_index.php" method="post">
+          identificador
+          <label for="inputidentificador" class="sr-only">identificador</label>
+          <input type="text" name="identificador" id="inputidentificador" class="form-control" placeholder="<?php echo $Mostrar['codigo_udg'];  ?>" autocomplete="off" required autofocus>
+          <input type="submit" class="btn btn-lg btn-dark btn-block" name="Eliminar Producto" value="Editar Producto">
         </form>
+
 			</div>
     </main>
     <footer>

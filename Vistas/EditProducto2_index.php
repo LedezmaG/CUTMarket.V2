@@ -1,11 +1,15 @@
 <?php
 include("../Logica/Conexion.php");
 session_start();
-$codigo = $_SESSION['Codigo'];
+
 if ($_SESSION['Loggeado'] != true) {
 	header("location: ../index.php");
 }
+$codigo = $_SESSION['Codigo'];
+$idTienda =  $_SESSION['idTienda'];
 
+$_SESSION['idProdutoEliminar'] = $_POST['identificador'];
+$IDproducto = $_SESSION['idProdutoEliminar'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -231,19 +235,35 @@ if ($_SESSION['Loggeado'] != true) {
 			</header>
     <main>
 			<div class="form-registry">
-      <h1>Agregar Producto</h1>
-        <form class="" action="../Logica/RegistrarProducto_logica.php" method="post">
-          Nombre del producto
+
+      <h1>Editar Producto </h1>
+
+			<?php
+			$Sql = "SELECT * FROM producto WHERE id_producto = '$IDproducto';";
+			$Resul = mysqli_query($conn,$Sql);
+
+			while ($Mostrar = mysqli_fetch_array($Resul)) {
+			?>
+
+        <form class="" action="../Logica/EditProducto_Logica.php" method="post">
+          identificador
+          <label for="inputidentificador" class="sr-only">identificador</label>
+          <input type="text" disabled name="identificador" id="inputidentificador" class="form-control" value="<?php echo $_SESSION['idProdutoEliminar']; ?>" placeholder="<?php echo $_SESSION['idProdutoEliminar']; ?>" autocomplete="off" required autofocus>
+					Nombre
           <label for="inputNombre" class="sr-only">Nombre</label>
-          <input type="text" name="Nombre" id="inputNombre" class="form-control" placeholder="" autocomplete="off" required autofocus>
-					Descripcion del producto
+          <input type="text" name="identNombre" id="inputNombre" class="form-control" placeholder="<?php echo $Mostrar['nombre']; ?>" autocomplete="off" autofocus>
+					Descripcion
           <label for="inputDescripcion" class="sr-only">Descripcion</label>
-          <input type="text" name="Descripcion" id="inputDescripcion" class="form-control" placeholder="" autocomplete="off" required autofocus>
-					Precio producto
+          <input type="text" name="Descripcion" id="inputDescripcion" class="form-control" placeholder="<?php echo $Mostrar['descripcion']; ?>" autocomplete="off" autofocus>
+					Precio
           <label for="inputPrecio" class="sr-only">Precio</label>
-          <input type="text" name="Precio" id="inputPrecio" class="form-control" placeholder="" autocomplete="off" required autofocus>
-					<input type="submit" class="btn btn-lg btn-dark btn-block" name="Enviar" value="Agregar Producto">
+          <input type="text" name="Precio" id="inputPrecio" class="form-control" placeholder="<?php echo $Mostrar['precio']; ?>" autocomplete="off" autofocus>
+
+          <input type="submit" class="btn btn-lg btn-dark btn-block" name="Eliminar Producto" value="Editar Producto">
         </form>
+
+			<?php } ?>
+
 			</div>
     </main>
     <footer>

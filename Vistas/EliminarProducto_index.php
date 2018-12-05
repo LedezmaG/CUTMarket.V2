@@ -249,27 +249,27 @@ $idTienda =  $_SESSION['idTienda'];
           </thead>
           <tbody >
 						<?php
-						$Sql = "SELECT * FROM producto WHERE id_tienda = 1;";
+						$Sql = "SELECT * FROM producto WHERE id_tienda = '$idTienda';";
 						$Resul = mysqli_query($conn,$Sql);
 
 						while ($Mostrar = mysqli_fetch_array($Resul)) {
 						?>
             <tr>
-              <th scope="row"><?php $Mostrar['id_producto'] ?></th>
-              <td><?php $Mostrar['nombre'] ?></td>
-              <td><?php $Mostrar['descripcion'] ?></td>
-              <td><?php $Mostrar['precio'] ?></td>
-              <td><?php $Mostrar['foto'] ?></td>
+              <th scope="row"><?php echo $Mostrar['id_producto']; ?></th>
+              <td><?php echo $Mostrar['nombre']; ?></td>
+              <td><?php echo $Mostrar['descripcion']; ?></td>
+              <td><?php echo $Mostrar['precio']; ?></td>
+              <td><?php echo $Mostrar['foto']; ?></td>
             </tr>
 						      <?php } ?>
           </tbody>
         </table>
 
-        <form class="" action="index.html" method="post">
+        <form class="" action="../Logica/EleminarProducto_Logica.php" method="post">
           identificador
-          <label for="inputCodigo" class="sr-only">identificador</label>
-          <input type="text" name="Codigo" id="inputCodigo" class="form-control" placeholder="<?php echo $Mostrar['codigo_udg'];  ?>" autocomplete="off" required autofocus>
-          <input type="submit" name="Eliminar Producto" value="Eliminar Producto">
+          <label for="inputidentificador" class="sr-only">identificador</label>
+          <input type="text" name="identificador" id="inputidentificador" class="form-control" placeholder="Identificador" autocomplete="off" required autofocus>
+          <input type="submit" class="btn btn-lg btn-dark btn-block" name="EliminarProducto" value="Eliminar Producto">
         </form>
 
 			</div>

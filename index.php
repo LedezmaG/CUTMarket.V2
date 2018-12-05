@@ -193,8 +193,9 @@ session_start();
 								<p id="tienda_descripcion">
 									<?php
 										$Producto = $Mostrar['ubicacion'];
-										echo $Mostrar['descripcion'];
-									 ?>
+										echo $Mostrar['descripcion'];?><br>
+									<?php  	echo $Mostrar['ubicacion'];?><br>
+
 								</p>
 							</div>
 							<div class="tarjetaImagen">
@@ -217,11 +218,12 @@ session_start();
 							<h4 id="tienda_nombre"><?php echo $Mostrar['nombre'];  ?></h4>
 							<div class="dropdown-divider"></div>
 							<p id="tienda_descripcion">
-								<?php
-								$Producto = $Mostrar['ubicacion'];
-								echo $Mostrar['descripcion'];
-
-								 ?>
+								<p id="tienda_descripcion">
+									<?php
+										$Producto = $Mostrar['ubicacion'];
+										echo $Mostrar['descripcion'];?><br>
+									<?php  	echo $Mostrar['ubicacion'];?><br>
+								</p>
 							</p>
 						</div>
 						<div class="tarjetaImagen">
@@ -252,7 +254,7 @@ function GetId(codigo)
 
 function EnviarDatosTienda(id)
 {
-	location.href="/CUTMarket.V2/vistas/tienda_index.php?id="+ id ;
+	location.href="/CUTMarket.V2/vistas/Tienda_index.php?id="+ id ;
 	//window.location.replace("http://localhost/CUTMarket.V2/vistas/tienda_index.php");
 }
 

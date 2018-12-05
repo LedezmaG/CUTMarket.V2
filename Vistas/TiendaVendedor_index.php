@@ -224,7 +224,7 @@ $_SESSION['idTienda'] = $Mostrar['id_tienda'];
 										<i class="icon fas fa-plus-square fa-2x"></i>
 										Agregar Producto
 									</a><br>
-									<a class="navbar-brand" href="../index.php">
+									<a class="navbar-brand" href="EditProducto_index.php">
 										<i class="icon fas fa-pen-square fa-2x"></i>
 										Editar Producto
 									</a><br>

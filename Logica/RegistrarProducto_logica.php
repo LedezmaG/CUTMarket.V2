@@ -1,11 +1,11 @@
 <?php
   include('Conexion.php');
   session_start();
-  $idTienda = $_SESSION['idTienda'];
 
-  $nombre = $_POST['txtNombre'];
-  $descripcion = $_POST['txtDescripcion'];
-  $precio = $_POST['txtPrecio'];
+  $idTienda = $_SESSION['idTienda'];
+  $nombre = $_POST['Nombre'];
+  $descripcion = $_POST['Descripcion'];
+  $precio = $_POST['Precio'];
 
 /*
   if(isset($_POST['btnSubmit']))
@@ -18,7 +18,7 @@
     move_uploaded_file($imagentmpnombre, $carpeta.$imagen);
   }*/
 
-    $sql = "INSERT INTO producto (id_tienda,nombre,descripcion,precio,Editado) VALUES ($idTienda,'$nombre','$descripcion',$precio,2) ";
+    $sql = "INSERT INTO producto (id_tienda,nombre,descripcion,precio) VALUES ('$idTienda','$nombre','$descripcion',$precio); ";
     //$Resultado_ = $conn -> query($Query_Registro);
     if ($conn->query($sql) === TRUE) {
         ?>
