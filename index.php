@@ -227,7 +227,7 @@ session_start();
 							</p>
 						</div>
 						<div class="tarjetaImagen">
-							<img src="imgUsuarios/<?php echo $Mostrar['foto']; ?>">
+							<img src="img/Cut_Market.png" width="100" height="52">
 						</div>
 					</div>
 				<?php

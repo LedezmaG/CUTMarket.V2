@@ -3,9 +3,7 @@ include('../Logica/Conexion.php');
 $ID = $_GET['id'];
 $_SESSION['idTienda'] = $ID;
 
-if ($_SESSION['Loggeado'] != true) {
-	header("location: ../index.php");
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -238,30 +236,34 @@ if ($_SESSION['Loggeado'] != true) {
 									</div>
 									<?php
 										}
-										//$Cuenta = $_SESSION['User'];
+										$i =0;
 										$Sql = "SELECT * FROM producto WHERE id_tienda = '$ID';";
 										$Resul = mysqli_query($conn,$Sql);
 
 										while ($Mostrar = mysqli_fetch_array($Resul)) {
+											$i = $i + 1;
 										?>
-										<form class="" action="Pededo-Nuevo_Logica.php" method="GET">
+										<form class="" action="../Logica/Pededo-Nuevo_Logica.php" method="GET">
 											<div class="productos">
 													<div class="productos-nombre" style="font-size: 17px;">
 														<p><span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['nombre']; ?></span></p>
 													</div>
 													<div class="productos-precio">
 														<p>
-															<span style="font-size: 17px; color: rgb(122, 122, 122);" onclick="Mas( )"><i class="fas fa-plus-square"></i></span>
 															<span>
-																<input type="text" name="CantidadP" id="CantidadP" class="cantidad" placeholder="0" autocomplete="off"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" maxlength=9 autofocus>
+																<input type="text" name="prod" id="CantidadP<?php echo $Mostrar['id_producto']; ?>" class="cantidad" placeholder="0" autocomplete="off"  oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" maxlength=9 autofocus>
 															</span>
-															<span style="font-size: 17px; color: rgb(122, 122, 122);" onclick="Menos()"><i class="fas fa-minus-square"></i></span>
-															<span class="badge badge-secondary" style="font-size: 17px;"><?php echo $Mostrar['precio']; ?> </span>
+
+															<span class="badge badge-secondary" style="font-size: 17px;">$<?php echo $Mostrar['precio'];?> </span>
+
 														</p>
+														<span>
+															<a href="#" onclick="Pedir(<?php echo $Mostrar ['id_producto']; ?>,<?php echo $Mostrar ['precio']; ?>)" class="btn btn-default">Pedir</a>
+														</span>
 													</div>
 										</div>
 										<?php } ?>
-										<input type="submit" name="Pededo" value="Realizar pedido">
+
 									</form>
 								</div>
 							</div>
@@ -294,20 +296,15 @@ if ($_SESSION['Loggeado'] != true) {
 </html>
 
 <script type="text/javascript">
-	var num = 0;
-function Mas(){
-	num++;
-	alert(num );
-}
-function Menos(){
-	if (num > 0) {
-		num--;
-		alert(num);
-	}
-}
-function cambiarimg()
+
+function Pedir(id,precio)
 {
-	alert("hey");
+	var cantidad = document.getElementById("CantidadP".concat(id)).value;
+
+<?php  ?>
+		alert(cantidad);
+		location.href="/CUTMarket.V2/Logica/Pedido-Nuevo_Logica.php?id="+ id ;
+
 }
 
 </script>

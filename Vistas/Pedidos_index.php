@@ -1,6 +1,7 @@
 <?php
 include("../Logica/Conexion.php");
 session_start();
+$codigo = $_SESSION['Codigo'];
 if ($_SESSION['Loggeado'] != true) {
 	header("location: ../index.php");
 }
@@ -116,20 +117,30 @@ if ($_SESSION['Loggeado'] != true) {
 				<!--TITULO-->
 				<h2>Mis Pedidos</h2>
 				<!--PEDIDOS-->
+
+				<?php
+				$Sql = "SELECT * FROM pedido WHERE id_tienda = '$codigo';";
+				$Resul = mysqli_query($conn,$Sql);
+
+				while ($Mostrar = mysqli_fetch_array($Resul)) {
+				?>
+
 				<div class="contenedor-pedidos">
 					<div class="pedidos">
 						<p>
-							<h4 id="cliente">Nombre Cliente</h4>
+							<h4 id="cliente">Pedido: <?php echo $Mostrar['id_pedido']; ?></h4>
 						</p>
 						<div class="dropdown-divider"></div>
 						<p id="pedido">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat.
+							Tienda: <?php echo $Mostrar['id_tienda']; ?><br>
+							Producto: <?php echo $Mostrar['id_producto']; ?><br>
+							Cantidad: <?php echo $Mostrar['cantidad']; ?><br>
+							precio: <?php echo $Mostrar['Precio']; ?><br>
+							Total: <?php echo $Mostrar['total']; ?><br>
 						</p>
 					</div>
 				</div>
+			<?php } ?>
 			</main>
 			<footer>
 				<p class="mt-5 mb-3 text-muted" style="text-align: center;">Copyright &copy; CUTMarket 2018-2019</p>

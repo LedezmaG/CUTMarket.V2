@@ -1,6 +1,6 @@
 <?php
 include('Conexion.php');
-$_POST['sutmitFOTO']
+$_POST['sutmitFOTO'];
 
   //obtiene el puro nombre de la imagen
   $img = $_FILES['inputFoto']['name'];

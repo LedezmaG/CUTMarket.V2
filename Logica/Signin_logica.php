@@ -20,12 +20,6 @@
     move_uploaded_file($imagentmpnombre, $carpeta.$imagen);
   }
 
- // echo "<div id='img_div'> ";
-  //echo "<img src='".$imagentmpnombre."'>";
-
-
-  //$imagen = addslashes(file_get_contents($_FILES['inputPhoto']['tmp_name'])); // se toma la imajen para poder guarar en bd
-
   $PassCryp = password_hash($contra, PASSWORD_DEFAULT, array("cost" => 10));
 
   $Query = "SELECT user FROM usuario WHERE user = '$usuario' ";
@@ -36,7 +30,7 @@
 
   if ($result->num_rows <= 0 && $resultadoCorreo->num_rows <=0) {
 
-    $Query_Registro = "INSERT INTO usuario VALUES ($codigo,'$nombre','$telefono','$correo','$usuario','$PassCryp','$fecha',1 ,1 , '$imagen');";
+    $Query_Registro = "INSERT INTO usuario VALUES ($codigo,'$nombre','$telefono','$correo','$usuario','$PassCryp','$fecha',1 ,1 ,'$imagen');";
     //$Resultado_ = $conn -> query($Query_Registro);
     if ($conn->query($Query_Registro) === TRUE) {
         ?>
