@@ -2,10 +2,12 @@
   include('Conexion.php');
   session_start();
   $idTienda = $_SESSION['idTienda'];
+  $codigo = $_SESSION['Codigo'];
 
-  $nombre = $_POST['txtNombre'];
-  $descripcion = $_POST['txtDescripcion'];
-  $precio = $_POST['txtPrecio'];
+  $nombre = $_POST['NombreTienda'];
+  $Ubicacion = $_POST['Ubicacion'];
+  $descripcion = $_POST['Descipcion'];
+//  $precio = $_POST['txtPrecio'];
 
 /*
   if(isset($_POST['btnSubmit']))
@@ -18,13 +20,13 @@
     move_uploaded_file($imagentmpnombre, $carpeta.$imagen);
   }*/
 
-    $sql = "INSERT INTO producto (id_tienda,nombre,descripcion,precio,Editado) VALUES ($idTienda,'$nombre','$descripcion',$precio,2) ";
+    $sql = "INSERT INTO Tienda (codigo_udg,nombre,ubicacion,descripcion) VALUES ($codigo,'$nombre','$descripcion','$Ubicacion') ";
     //$Resultado_ = $conn -> query($Query_Registro);
     if ($conn->query($sql) === TRUE) {
         ?>
       <script>
         alert("Producto agregado exitosamente");
-        window.location.href = "../Vistas/RegistroProducto_index.php";
+        window.location.href = "../Vistas/TiendaVendedor_index.php";
       </script>
         <?php
       }else {

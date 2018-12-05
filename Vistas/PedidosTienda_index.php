@@ -10,6 +10,7 @@ if ($_SESSION['Loggeado'] != true) {
 	<head>
 		<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pedidos</title>
 		<title>CUTMarket</title>
 		<!--LIBRERIAS DE CSS-->
 		<link rel="stylesheet" type="text/css" href="../bootstrap-4.1.3/dist/css/bootstrap.min.css">
@@ -83,7 +84,7 @@ if ($_SESSION['Loggeado'] != true) {
 									<a class="dropdown-item" href="Perfil_index.php">Perfil</a>
 									<div class="dropdown-divider"></div>
 									<!--BOTON ***-->
-									<a class="dropdown-item" href="#">Mis Pedidos</a>
+									<a class="dropdown-item" href="Pedidos_index.php">Mis Pedidos</a>
 								</div>
 							</li>
 							<!--BOTON TIENDA-->
@@ -96,7 +97,7 @@ if ($_SESSION['Loggeado'] != true) {
 									<a class="dropdown-item" href="TiendaVendedor_index.php">Mi Tienda</a>
 									<div class="dropdown-divider"></div>
 									<!--BOTON PEDIDOS-->
-									<a id="btnPedidos" class="dropdown-item" href="PedidosTienda_index.php">Pedidos</a>
+									<a id="btnPedidos" class="dropdown-item" href="#">Pedidos</a>
 								</div>
 							</li>
 						</ul>
@@ -114,9 +115,15 @@ if ($_SESSION['Loggeado'] != true) {
 			<br>
 			<main>
 				<!--TITULO-->
-				<h2>Mis Pedidos</h2>
+				<h2>Pedidos</h2>
 				<!--PEDIDOS-->
 				<div class="contenedor-pedidos">
+					<?php
+						$Sql = "SELECT * FROM tienda WHERE nombre ;";
+						$Resul = mysqli_query($conn,$Sql);
+
+						while ($Mostrar = mysqli_fetch_array($Resul)) {
+					 ?>
 					<div class="pedidos">
 						<p>
 							<h4 id="cliente">Nombre Cliente</h4>
@@ -129,6 +136,7 @@ if ($_SESSION['Loggeado'] != true) {
 							consequat.
 						</p>
 					</div>
+				<?php } ?>
 				</div>
 			</main>
 			<footer>

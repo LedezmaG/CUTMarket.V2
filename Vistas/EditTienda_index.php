@@ -1,10 +1,17 @@
 <?php
 include("../Logica/Conexion.php");
 session_start();
+$Editado = 0;
 $codigo = $_SESSION['Codigo'];
 if ($_SESSION['Loggeado'] != true) {
 	header("location: ../index.php");
 }
+
+$Sql = "SELECT * FROM tienda WHERE codigo_udg = '$codigo';";
+$Resul = mysqli_query($conn,$Sql);
+
+while ($Mostrar = mysqli_fetch_array($Resul))
+{$edit = $Mostrar['Editado'];}
 
  ?>
 <!DOCTYPE html>
@@ -231,40 +238,41 @@ if ($_SESSION['Loggeado'] != true) {
 			</header>
     <main>
 			<div class="form-registry">
-      <h1>Perfil</h1>
-        <?php
-        $Sql = "SELECT * FROM usuario WHERE codigo_udg = '$codigo';";
-        $Resul = mysqli_query($conn,$Sql);
-
-        while ($Mostrar = mysqli_fetch_array($Resul)) {
-        ?>
-        Codigo
-        <label for="inputCodigo" class="sr-only">Codigo</label>
-        <input type="text" disabled name="Codigo" id="inputCodigo" class="form-control" placeholder="<?php echo $Mostrar['codigo_udg'];  ?>" autocomplete="off" required autofocus>
-        Nombre
+      <h1>Mi Tienda</h1>
+			<?php if($edit == 1){ ?>
+			<form class="" action="../Logica/TiendaRegistr_Logica.php" method="post">
+				Nombre de tienda
+        <label for="inputCodigo" class="sr-only">NombreTienda</label>
+        <input type="text" name="NombreTienda" id="inputNombreTienda" class="form-control" placeholder="Nombre de tienda" autocomplete="off" required autofocus>
+        Ubicacion
         <label for="inputNombre" class="sr-only">Nombre</label>
-        <input type="text" disabled name="Nombre" id="inputNombre" class="form-control" placeholder="<?php echo $Mostrar['nombre'];  ?>" autocomplete="off" required autofocus>
-        Username
-        <label for="inputUsername" class="sr-only">User</label>
-        <input type="text" disabled name="Username" id="inputUsername" class="form-control" placeholder="<?php echo $Mostrar['user'];  ?>" autocomplete="off" required autofocus>
-				Telefono
-				<label for="inputUsername" class="sr-only">telefono</label>
-				<input type="text" disabled name="Telefono" id="inputTelefono" class="form-control" placeholder="<?php echo $Mostrar['telefono'];  ?>" autocomplete="off" required autofocus>
-				Email
-				<label for="inputUsername" class="sr-only">Email</label>
-				<input type="text" disabled name="Email" id="inputEmail" class="form-control" placeholder="<?php echo $Mostrar['correo'];  ?>" autocomplete="off" required autofocus>
-				Fecha de nacimiento
-				<label for="inputUsername" class="sr-only">User</label>
-				<input type="date" disabled name="FN" id="inputFN" class="form-control" placeholder="<?php echo $Mostrar['fecha_nacimiento'];  ?>" autocomplete="off" required autofocus>
-				<br>
-      <?php } ?>
+        <input type="text" name="Ubicacion" id="inputNombre" class="form-control" placeholder="Ubicacion" autocomplete="off" required autofocus>
+        Descipcion
+        <label for="inputUsername" class="sr-only">Descipcion</label>
+        <input type="text" name="Descipcion" id="inputDescipcion" class="form-control" placeholder="Descipcion" autocomplete="off" required autofocus>
+				<input type="submit" class="btn btn-lg btn-dark btn-block" name="enviar" value="Registrar Tienda">
+			</form>
+
+			<?php
+		}	else {
+						$Sql = "SELECT * FROM tienda WHERE codigo_udg = '$codigo';";
+							$Resul = mysqli_query($conn,$Sql);
+
+							while ($Mostrar = mysqli_fetch_array($Resul))
+							{
+			?>
+				Nombre de tienda
+        <label for="inputCodigo" class="sr-only">NombreTienda</label>
+        <input type="text" disabled name="NombreTienda" id="inputNombreTienda" class="form-control" placeholder="<?php echo $Mostrar['nombre'];  ?>" autocomplete="off" required autofocus>
+        Ubicacion
+        <label for="inputUbicacion" class="sr-only">Ubicacion</label>
+        <input type="text" disabled name="Ubicacion" id="inputUbicacion" class="form-control" placeholder="<?php echo $Mostrar['ubicacion'];  ?>" autocomplete="off" required autofocus>
+        Descipcion
+        <label for="inputDescipcion" class="sr-only">User</label>
+        <input type="text" disabled name="Descipcion" id="inputDescipcion" class="form-control" placeholder="<?php echo $Mostrar['descripcion'];  ?>" autocomplete="off" required autofocus>
+      <?php }} ?>
 			<form class="form-registry" action="../logica/Modificar-Pass_Logica.php" method="post">
-				Cambiar contraseña
-				<label for="inputPassword" class="sr-only">Password</label>
-				<input type="password" name="newPassword0" id="inputPassword0" class="form-control" placeholder="Contraseña nueva" onkeyup='compararContrasena();' autocomplete="off" required>
-				<input type="password" name="newPassword1" id="inputPassword1" class="form-control" placeholder="Confiarma contraseña nueva" onkeyup='compararContrasena();' autocomplete="off" required>
-				<button id="enviarContraseña" disabled name="Buscador" class="btn btn-outline-success" type="submit" >Cambiar Contraseña</button>
-		</div>
+			</div>
     </main>
     <footer>
       <p class="mt-5 mb-3 text-muted" style="text-align: center;">Copyright &copy; CUTMarket 2018-2019</p>
@@ -272,27 +280,3 @@ if ($_SESSION['Loggeado'] != true) {
     </div>
   </body>
 </html>
-
-<script type="text/javascript">
-var compararContrasena = function()
-{
-	if(document.getElementById('inputPassword0').value != document.getElementById('inputPassword1').value)
-	{
-		document.getElementById('enviarContraseña').style.background = 'red';
-		document.getElementById('btnSubmit').disabled = true;
-	}
-	else if(document.getElementById('inputPassword0').value == "" && document.getElementById('inputPassword1').value == "")
-	{
-		document.getElementById('enviarContraseña').style.background = 'yellow';
-		document.getElementById('enviarContraseña').disabled = true;
-	}
-
-	else
-	{
-			document.getElementById('enviarContraseña').style.background = 'green';
-			document.getElementById('enviarContraseña').disabled = false;
-	}
-
-}
-
-</script>

@@ -115,7 +115,7 @@ session_start();
 						</li>
 						<!--BOTON TIENDA-->
 						<?php
-					}if ($_SESSION['tipo'] != 2 && $_SESSION['Loggeado'] == true) {
+					}if ($_SESSION['tipo'] == 2 ) {
 						 ?>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -6,6 +6,15 @@ $codigo = $_SESSION['Codigo'];
 if ($_SESSION['Loggeado'] != true) {
 	header("location: ../index.php");
 }
+
+$Sql = "SELECT id_tienda FROM tienda WHERE codigo_udg = '$codigo';";
+$Resul = mysqli_query($conn,$Sql);
+
+while ($Mostrar = mysqli_fetch_array($Resul)){
+
+$_SESSION['idTienda'] = $Mostrar['id_tienda'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -124,6 +133,14 @@ if ($_SESSION['Loggeado'] != true) {
 	    	text-decoration: none;
 	    	color: black;
 		}
+		i {
+
+			color: rgb(152, 152, 152);
+		}
+		i:hover {
+
+			color: rgb(113, 113, 113);
+		}
 	</style>
 </head>
 
@@ -133,7 +150,7 @@ if ($_SESSION['Loggeado'] != true) {
 			<!--BARRA DE NAVEGACION-->
 			<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #212529;">
 				<!--LOGO-->
-			<a class="navbar-brand" href="../index.php"><img src="../mg/Cut_Market.png" width="100" height="52"></a>
+				<a class="navbar-brand" href="../index.php"><img src="../im/Cut_Market.png" width="100px" height="52"></a>
 				<!--TOGGLER-->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -149,15 +166,13 @@ if ($_SESSION['Loggeado'] != true) {
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-sliders-h"></i> Opciones
 							</a>
+
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="Perfil_index.php">Perfil</a>
 								<div class="dropdown-divider"></div>
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Another action</a>
-								<div class="dropdown-divider"></div>
-								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item" href="#">Mis Pedidos</a>
 							</div>
 						</li>
 						<!--BOTON TIENDA-->
@@ -167,13 +182,10 @@ if ($_SESSION['Loggeado'] != true) {
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Action</a>
-								<div class="dropdown-divider"></div>
-								<!--BOTON ***-->
-								<a class="dropdown-item" href="#">Another action</a>
+								<a class="dropdown-item" href="TiendaVendedor_index.php">Mi Tienda</a>
 								<div class="dropdown-divider"></div>
 								<!--BOTON PEDIDOS-->
-								<a id="btnPedidos" class="dropdown-item" href="#">Pedidos</a>
+								<a id="btnPedidos" class="dropdown-item" href="PedidosTienda_index.php">Pedidos</a>
 							</div>
 						</li>
 					</ul>
@@ -190,42 +202,36 @@ if ($_SESSION['Loggeado'] != true) {
 		</header>
 		<!--CONTENIDO-->
 		<main>
+			<br><br>
 			<div class="contenedor-inicio">
 
 				<section >
-					<?php
-					$Sql = "SELECT * FROM tienda WHERE codigo_udg = '$codigo';";
-					$Resul = mysqli_query($conn,$Sql);
-
-					while ($Mostrar = mysqli_fetch_array($Resul)) {
-          $IdTienda = $Mostrar['id_tienda'];
-					 ?>
-
 					<div class=contenedor-tienda>
 						<div class="card text-center">
 							<div class="card-header">
-								<h1></h1>
+								<h1>Mi Tienda</h1>
 							</div>
 							<div class="card-body">
 								<img class="card-img-top" src="../img/donas.jpg" alt="Card image cap">
 								<br>
-								<h5 class="card-title"><?php echo $Mostrar['nombre'];  ?></h5>
+								<h5 class="card-title"></h5>
 								<div class="jumbotron">
-									<p>Ubicacion: <?php echo $Mostrar['ubicacion']; ?> </p>
-									<p></p>
-								</div>
-              <?php } ?>
-								<div class="productos-tienda" >
-									<div class="productos-header" >
-										<div id="titulo" class="productos-nombre-header" >
-											<h3>Productos</h3>
-										</div>
-									</div>
-									<div class="productos">
-											<div class="productos-nombre" style="font-size: 17px;" onclick="EnviarProducto(<?php echo $IdTienda;?>)">
-												<p><span class="badge badge-secondary" style="font-size: 17px;">Agregar productos   <?php echo $IdTienda;?></span></p>
-											</div>
-									</div>
+									<a class="navbar-brand" href="EditTienda_index.php">
+										<i class="icon fas fa-address-card fa-2x"></i>
+										Configurar Mi tienda
+									</a><br>
+									<a class="navbar-brand" href="AddProducto_index.php">
+										<i class="icon fas fa-plus-square fa-2x"></i>
+										Agregar Producto
+									</a><br>
+									<a class="navbar-brand" href="../index.php">
+										<i class="icon fas fa-pen-square fa-2x"></i>
+										Editar Producto
+									</a><br>
+									<a class="navbar-brand" href="EliminarProducto_index.php">
+										<i class="icon fas fa-minus-square fa-2x"></i>
+										Eliminar Producto
+									</a>
 								</div>
 							</div>
 						</div>
