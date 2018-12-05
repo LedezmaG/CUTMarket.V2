@@ -18,13 +18,13 @@
     move_uploaded_file($imagentmpnombre, $carpeta.$imagen);
   }*/
 
-    $sql = "INSERT INTO producto (id_tienda,nombre,descripcion,precio) VALUES ('$idTienda','$nombre','$descripcion',$precio); ";
+    $sql = "INSERT INTO producto (id_tienda,nombre,descripcion,precio) VALUES ($idTienda,'$nombre','$descripcion', $precio); ";
     //$Resultado_ = $conn -> query($Query_Registro);
     if ($conn->query($sql) === TRUE) {
         ?>
       <script>
         alert("Producto agregado exitosamente");
-        window.location.href = "../Vistas/RegistroProducto_index.php";
+        window.location.href = "../Vistas/TiendaVendedor_index.php";
       </script>
         <?php
       }else {

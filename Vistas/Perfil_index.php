@@ -201,7 +201,7 @@ if ($_SESSION['Loggeado'] != true) {
 									<a class="dropdown-item" href="Perfil_index.php">Perfil</a>
 									<div class="dropdown-divider"></div>
 									<!--BOTON ***-->
-									<a class="dropdown-item" href="#">Mis Pedidos</a>
+									<a class="dropdown-item" href="Pedidos_index.php">Mis Pedidos</a>
 								</div>
 							</li>
 							<!--BOTON TIENDA-->
